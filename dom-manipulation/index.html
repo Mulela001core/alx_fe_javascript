@@ -1,62 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dynamic Quote Generator</title>
-<style>
-  body { font-family: Arial, sans-serif; padding: 20px; }
-  #quoteDisplay { margin: 20px 0; font-size: 1.2em; }
-  input, select, button { margin: 5px 0; padding: 5px; }
-  #serverNotification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: #fff;
-    border-radius: 5px;
-    display: none;
-    z-index: 1000;
-  }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Quote Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #quoteDisplay {
+            font-size: 1.2rem;
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #4CAF50;
+        }
+
+        select, input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .controls {
+            margin-bottom: 15px;
+        }
+
+        #serverNotification {
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Dynamic Quote Generator</h1>
+    <h1>Dynamic Quote Generator</h1>
 
-<!-- Display Quote -->
-<div id="quoteDisplay">Loading...</div>
-<button id="newQuote">Show Random Quote</button>
+    <!-- CATEGORY FILTER -->
+    <div class="controls">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+        </select>
+    </div>
 
-<!-- Category Filter -->
-<div style="margin: 10px 0;">
-  <label for="categorySelect">Filter by Category:</label>
-  <select id="categorySelect"></select>
-</div>
+    <!-- QUOTE DISPLAY -->
+    <div id="quoteDisplay">Loading quote...</div>
 
-<!-- Add Quote Form -->
-<div id="addQuoteContainer">
-  <h3>Add a New Quote</h3>
-  <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-  <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-  <button id="addQuoteBtn" type="button">Add Quote</button>
-</div>
+    <!-- ACTION BUTTONS -->
+    <div class="controls">
+        <button id="showQuoteBtn">Show New Quote</button>
+        <button id="exportBtn">Export Quotes (JSON)</button>
+    </div>
 
-<!-- Import/Export -->
-<h3>Import / Export Quotes</h3>
-<input type="file" id="importFile" accept=".json" />
-<br>
-<button id="exportJsonBtn">Export Quotes to JSON</button>
+    <!-- IMPORT JSON -->
+    <div class="controls">
+        <label>Import Quotes (JSON):</label>
+        <input type="file" accept=".json" onchange="importFromJsonFile(event)" />
+    </div>
 
-<!-- Manual Server Sync -->
-<div id="conflictContainer">
-  <button id="manualSyncBtn">Sync with Server Now</button>
-</div>
+    
 
-<!-- Notification -->
-<div id="serverNotification"></div>
+    <!-- 
+        Add Quote Form
+        (Created dynamically by createAddQuoteForm() in JS)
+    -->
 
-<script src="script.js"></script>
+    <!-- 
+        Manual Server Sync Button
+        (Created dynamically by createConflictResolutionUI())
+    -->
+
+    <!-- SCRIPT -->
+    <script src="script.js"></script>
+
 </body>
 </html>
