@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Quote Generator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Quote Generator</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  #quoteDisplay { margin: 20px 0; font-size: 1.2em; }
+  input, select, button { margin: 5px 0; padding: 5px; }
+  #serverNotification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+  }
+</style>
 </head>
 <body>
-  <h1>Dynamic Quote Generator</h1>
 
-  <!-- Category Selector -->
+<h1>Dynamic Quote Generator</h1>
+
+<!-- Display Quote -->
+<div id="quoteDisplay">Loading...</div>
+<button id="newQuote">Show Random Quote</button>
+
+<!-- Category Filter -->
+<div style="margin: 10px 0;">
+  <label for="categorySelect">Filter by Category:</label>
   <select id="categorySelect"></select>
+</div>
 
-  <!-- Quote Display -->
-  <div id="quoteDisplay" style="margin: 20px 0; font-size: 20px; font-weight: bold;"></div>
-
-  <!-- Button: Show New Quote -->
-  <button id="newQuote">Show New Quote</button>
-
-  <hr>
-
-  <!-- Add New Quote Form -->
+<!-- Add Quote Form -->
+<div id="addQuoteContainer">
   <h3>Add a New Quote</h3>
-  <div>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote">
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category">
-    <button id="addQuoteBtn">Add Quote</button>
-  </div>
+  <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+  <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+  <button id="addQuoteBtn" type="button">Add Quote</button>
+</div>
 
-  <hr>
-
+<!-- Import/Export -->
 <h3>Import / Export Quotes</h3>
-
-<!-- Export Button -->
+<input type="file" id="importFile" accept=".json" />
+<br>
 <button id="exportJsonBtn">Export Quotes to JSON</button>
 
-<br><br>
+<!-- Manual Server Sync -->
+<div id="conflictContainer">
+  <button id="manualSyncBtn">Sync with Server Now</button>
+</div>
 
-<!-- Import Input -->
-<input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+<!-- Notification -->
+<div id="serverNotification"></div>
 
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
